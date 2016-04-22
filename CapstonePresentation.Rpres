@@ -1,0 +1,52 @@
+Capstone Presentation
+========================================================
+<span style="font-weight:bold; font-size: 32px;"> Author  :  Malay Das </span>
+
+Date  :  `r format(Sys.Date(),format="%B %d,%Y")`
+
+
+Capstone Overview
+========================================================
+
+- Purpose of this project is to create an App. This will receive input phrase/sentence, and based on that will produce suggestion for next word. We are trying to emulate what we see day to day while typing in our smartphone.
+
+
+- To predict, i will be taking help of different Natural Language processing algorithm and ultimately build a consolidated final model.
+
+
+- The dataset provided by SwiftKey is used to build the model. Typically i used 1.5% sample of the whole data. 
+
+- Although Swiftkey data comes in different languages, i will be focusing only on english language prediction.
+
+
+
+Modeling 
+========================================================
+- The final model which i designed, is basically consolidation of Stupid Back-off and Markov Chain. 
+
+- The Stupid Back-off implements backing off from Quadrigram to Bigram , i.e- first i search for match in 
+4-gram,incase of match last word of 4-gram is the prediction ; in case not , i will search for 3-gram for a match , and so on so forth till match found.
+
+- The Markov Chain is created from 3-gram model, and also i applied discounting (Kneser-Ney) to cover up for some of the unseen words/phrases.
+
+
+
+Modeling (Contd.)
+========================================================
+- The final prediction algorithm wraps, above two NLP method in single function. If we can find a match using Stupid back off ,we show that as exact match ; otherwise we are falling back on the Markov Chain matrix to predict exact word. 
+
+
+- This application also has ability to show probable matches other than the exact match, which is extracted out of Markov Chain only. For Assignment purpose i am hiding/commenting that portion. Please refer the commented, incase you feel interested. 
+
+The Shiny App and it's use
+========================================================
+
+- Provision for two different types of prediction kept in the App.
+      1. Exact Prediction ( consist of single word)
+      2. Possible Output (consists of first 4-5 highly probable word)(hidden/commented)
+      
+- This is done, keeping in mind that even some of the best model may not find it easy to predict accurately every time. In case "exact prediction" fails to predict accurately, user always has the liberty to choose from the "possible list".
+
+- User need to enter the text for which he/she wants to get the next word. Once done, he/she should press the button.
+
+- Link to the app - <a href="shinyapp">http://malaydas.shinyapps.io/CapstoneApp</a>
